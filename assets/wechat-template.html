@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{DOCUMENT_TITLE}}</title>
+  <style>
+    body{margin:0;background:#FAF8F4;color:#2E2E31;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",Arial,sans-serif}
+    .toolbar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:16px;padding:14px 20px;background:rgba(250,248,244,.96);border-bottom:1px solid #E8E2DB}
+    .toolbar button{border:0;border-radius:8px;background:#C9633F;color:#fff;font-size:16px;font-weight:700;padding:10px 22px;cursor:pointer}
+    #status{color:#5C6FA3;font-weight:700}
+    .page{padding:28px 12px 60px}
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <button id="copy-button" type="button">复制公众号正文</button>
+    <span id="status">复制后粘贴到微信公众号编辑器</span>
+  </div>
+  <main class="page">
+    <section id="wechat-content" style="box-sizing:border-box;max-width:677px;margin:0 auto;padding:28px 10px 56px;color:#2E2E31;background:#FFFFFF;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',Arial,sans-serif;word-break:break-word;">
+      <div style="color:#5C6FA3;font-size:13px;font-weight:700;letter-spacing:1.8px;margin:0 0 18px;">{{KICKER}}</div>
+      <h1 style="margin:0 0 18px;font-size:32px;line-height:1.28;letter-spacing:-0.5px;font-weight:700;">{{TITLE_HTML}}</h1>
+      <p style="margin:0 0 38px;color:#6B6B70;font-size:20px;line-height:1.65;text-align:left;">{{SUBTITLE_HTML}}</p>
+      {{ARTICLE_HTML}}
+    </section>
+  </main>
+  <script>
+    const button = document.getElementById('copy-button');
+    const status = document.getElementById('status');
+    button.addEventListener('click', () => {
+      const range = document.createRange();
+      range.selectNode(document.getElementById('wechat-content'));
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      const copied = document.execCommand('copy');
+      selection.removeAllRanges();
+      status.textContent = copied ? '已复制，可以粘贴到公众号编辑器' : '复制失败，请手动全选正文';
+    });
+  </script>
+</body>
+</html>
