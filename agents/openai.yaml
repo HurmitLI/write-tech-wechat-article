@@ -1,0 +1,14 @@
+interface:
+  display_name: 科技公众号深度稿
+  short_description: 把AI产品选题做成有层次、有配图、可发布的公众号长文
+  default_prompt: Use $write-tech-wechat-article to turn my AI product topic into
+    a researched, layered, illustrated WeChat article.
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true
